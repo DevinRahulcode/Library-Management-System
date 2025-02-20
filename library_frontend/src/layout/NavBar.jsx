@@ -1,9 +1,10 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 
 function NavBar() {
     return (
         <div>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top ">
+            <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
                 <div className="container-fluid">
                     <a className="navbar-brand" href=""><span className="text-danger">Library</span>System</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -18,8 +19,8 @@ function NavBar() {
                                     Book</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="">Add A
-                                    Member</a>
+                                <Link className="nav-link active" aria-current="page" to="/adduser">Add A
+                                    Member</Link>
                             </li>
                         </ul>
                     </div>

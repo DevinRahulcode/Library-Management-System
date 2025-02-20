@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import axios from "axios";
+import {Link, useParams} from "react-router-dom";
 
 
 function DisplayMember() {
+
+    const {id} = useParams();
 
     const [members, setMembers] = useState([]);
 
@@ -10,10 +13,18 @@ function DisplayMember() {
         loadMemebers();
     }, []);
 
+    //Display All Details
     const loadMemebers = async () => {
         const result = await axios.get("http://localhost:8080/getall");
         setMembers(result.data);
     }
+
+    //Delete
+    const deleteMember = async (id) => {
+       await axios.delete(`http://localhost:8080/delete/${id}`)
+        loadMemebers();
+    }
+
 
     return (
         <div className="container">
@@ -40,9 +51,9 @@ function DisplayMember() {
                                 <td>{member.gender}</td>
                                 <td>{member.type}</td>
                                 <td>
-                                    <button className="btn btn-primary mx-2">View</button>
-                                    <button className="btn btn-warning mx-2">Eidt</button>
-                                    <button className="btn btn-danger mx-2">Delete</button>
+                                    <Link className="btn btn-primary mx-2" to={`/view/${member.id}`}>View</Link>
+                                    <Link className="btn btn-warning mx-2" to={`/edituser/${member.id}`}>Eidt</Link>
+                                    <Link className="btn btn-danger mx-2" onClick={() => deleteMember(member.id)}>Delete</Link>
 
                                 </td>
                             </tr>
